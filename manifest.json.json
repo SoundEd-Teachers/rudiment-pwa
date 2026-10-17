@@ -1,0 +1,22 @@
+{
+  "name": "Rudiment Practice Pad",
+  "short_name": "Rudiments",
+  "description": "Offline-first snare drum rudiment practice and tempo tracking.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#FFC107",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

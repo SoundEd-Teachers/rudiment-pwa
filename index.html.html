@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rudiment Practice Pad</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#121212">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header>
+    <h1>Rudiment Pad</h1>
+  </header>
+
+  <!-- Main Content Area -->
+  <main>
+    
+    <!-- MODULE 1: Curriculum / Rudiments View -->
+    <section id="view-rudiments" class="view active">
+      <div class="level-filters">
+        <button class="filter-btn active" data-level="all">All</button>
+        <button class="filter-btn" data-level="1">Lvl 1</button>
+        <button class="filter-btn" data-level="2">Lvl 2</button>
+        <button class="filter-btn" data-level="3">Lvl 3</button>
+        <button class="filter-btn" data-level="4">Lvl 4</button>
+        <button class="filter-btn" data-level="5">Lvl 5</button>
+        <button class="filter-btn" data-level="6">Lvl 6</button>
+      </div>
+      
+      <div id="rudiment-grid" class="grid-container">
+        <!-- Rudiment Cards injected via app.js -->
+      </div>
+    </section>
+
+    <!-- MODULE 2: Transient Stroke Counter -->
+    <section id="view-counter" class="view hidden">
+      <div class="counter-container">
+        <h2>Stroke Counter</h2>
+        <p class="subtitle">Use practice pad & device mic</p>
+        
+        <div class="meter-box">
+          <div id="audio-level-bar"></div>
+        </div>
+        
+        <div class="controls-group">
+          <label>Sensitivity: <span id="sens-val">50</span>%</label>
+          <input type="range" id="sensitivity-slider" min="1" max="100" value="50">
+          
+          <label>Duration: <span id="dur-val">15</span>s</label>
+          <input type="range" id="duration-slider" min="5" max="60" step="5" value="15">
+        </div>
+
+        <button id="start-counter-btn" class="primary-btn">Start Session</button>
+        
+        <div class="metrics-dashboard">
+          <div class="metric"><h3>Strokes</h3><span id="metric-strokes">0</span></div>
+          <div class="metric"><h3>Time Left</h3><span id="metric-time">0.0</span>s</div>
+          <div class="metric"><h3>SPS</h3><span id="metric-sps">0.0</span></div>
+          <div class="metric"><h3>16th BPM</h3><span id="metric-bpm">0</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-target="view-rudiments">
+      <span>🥁</span> Rudiments
+    </button>
+    <button class="nav-item" data-target="view-counter">
+      <span>⏱️</span> Counter
+    </button>
+  </nav>
+
+  <!-- FULL SCREEN PRACTICE MODAL -->
+  <div id="practice-modal" class="modal hidden">
+    <div class="modal-header">
+      <button id="close-modal-btn" class="icon-btn">✕ Back</button>
+      <h2 id="modal-title">Rudiment Name</h2>
+      <span id="modal-category" class="badge">Category</span>
+    </div>
+
+    <!-- Swipeable Image Viewer -->
+    <div class="viewer-container" id="swipe-container">
+      <div class="toggle-group">
+        <button class="toggle-btn active" data-panel="base">Rudiment</button>
+        <button class="toggle-btn" data-panel="app">Application</button>
+      </div>
+      <div class="swipe-track" id="swipe-track">
+        <div class="panel" id="panel-base">
+          <!-- Images injected via JS -->
+        </div>
+        <div class="panel" id="panel-app">
+          <!-- Images injected via JS -->
+        </div>
+      </div>
+        <div class="panel" id="panel-app">
+          <img id="img-app" src="" alt="Application" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-fallback" style="display:none;">[ App Image Missing ]</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedded Tools: Metronome & PB Log -->
+    <div class="tools-container">
+      
+      <!-- Metronome -->
+      <div class="metronome-box">
+        <div class="tempo-display">
+          <button id="bpm-down">-</button>
+          <span id="bpm-display">120</span> BPM
+          <button id="bpm-up">+</button>
+        </div>
+        <input type="range" id="bpm-slider" min="40" max="220" value="120">
+        <button id="play-metronome-btn" class="primary-btn">▶ Play Metronome</button>
+        <div id="visual-flash" class="flash-indicator"></div>
+      </div>
+
+      <!-- Personal Best Logger -->
+      <div class="pb-box">
+        <label>Personal Best (BPM):</label>
+        <div class="pb-input-group">
+          <input type="number" id="pb-input" min="0" max="300" placeholder="e.g. 140">
+          <button id="save-pb-btn">Save</button>
+        </div>
+        <small>Saved locally to your device.</small>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW Registered', reg))
+          .catch(err => console.error('SW Registration Failed', err));
+      });
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+  <script src="counter.js"></script>
+</body>
+</html>
