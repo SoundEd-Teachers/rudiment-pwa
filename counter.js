@@ -5,6 +5,7 @@ const sensSlider = document.getElementById('sensitivity-slider');
 const durSlider = document.getElementById('duration-slider');
 const sensVal = document.getElementById('sens-val');
 const durVal = document.getElementById('dur-val');
+const resetBtn = document.getElementById('reset-counter-btn');
 
 const metricStrokes = document.getElementById('metric-strokes');
 const metricTime = document.getElementById('metric-time');
@@ -149,3 +150,15 @@ startBtn.addEventListener('click', () => {
   if (isCounting) stopSession();
   else startSession();
 });
+
+function resetCounter() {
+  if (isCounting) stopSession();
+  strokes = 0;
+  metricStrokes.textContent = "0";
+  metricTime.textContent = sessionDuration.toFixed(1);
+  metricSps.textContent = "0.0";
+  metricBpm.textContent = "0";
+  levelBar.style.width = "0%";
+}
+
+resetBtn.addEventListener('click', resetCounter);
