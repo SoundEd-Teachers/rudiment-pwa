@@ -234,6 +234,10 @@ swipeContainer.addEventListener('touchend', e => {
   isSwiping = false;
 }, {passive: true});
 
+swipeContainer.addEventListener('click', () => {
+  modal.classList.toggle('immersive');
+});
+
 // --- 5. WEB AUDIO METRONOME ---
 const bpmDisplay = document.getElementById('bpm-display');
 const bpmSlider = document.getElementById('bpm-slider');
