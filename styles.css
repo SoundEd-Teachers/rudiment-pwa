@@ -256,3 +256,31 @@ input[type="range"] { width: 100%; margin-bottom: 16px; }
   font-size: 1rem; 
   font-weight: bold; 
 }
+
+/* --- Landscape & Immersive Mode Overrides --- */
+
+/* Allow images to grow larger when phone is sideways */
+@media (orientation: landscape) {
+  .panel { min-height: 60vh; }
+  .panel img { max-height: 60vh; }
+}
+
+/* Immersive Fullscreen Mode (triggered by tap) */
+.modal.immersive .modal-header,
+.modal.immersive .toggle-group,
+.modal.immersive .tools-container {
+  display: none;
+}
+.modal.immersive .viewer-container {
+  height: 100vh;
+  border-bottom: none;
+  background: #000;
+}
+.modal.immersive .panel {
+  height: 100vh;
+  padding: 8px;
+}
+.modal.immersive .panel img {
+  max-height: 95vh;
+  width: auto;
+}
