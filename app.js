@@ -54,10 +54,14 @@ const rudiments = [
   { id: 39, level: 5, name: 'Double Ratamacue', cat: 'drag' },
   { id: 40, level: 5, name: 'Triple Ratamacue', cat: 'drag' },
   // Level 6 (Hybrids)
-  { id: 41, level: 6, name: 'Cheese', cat: 'hybrid' },
-  { id: 42, level: 6, name: 'Egg Beaters', cat: 'hybrid' },
-  { id: 43, level: 6, name: 'Book Report', cat: 'hybrid' },
-  { id: 44, level: 6, name: 'Flam Five', cat: 'hybrid' }
+  { id: 41, name: "Cheese", level: 6, cat: "hybrid" },
+  { id: 42, name: "Egg Beaters", level: 6, cat: "hybrid" },
+  { id: 43, name: "Book Report", level: 6, cat: "hybrid" },
+  { id: 44, name: "Flam Five", level: 6, cat: "hybrid" },
+  { id: 45, name: "Choo Choo", level: 6, cat: "hybrid" },
+  { id: 46, name: "Grandmas", level: 6, cat: "hybrid" },
+  { id: 47, name: "Chut Cheese", level: 6, cat: "hybrid" },
+  { id: 48, name: "Inverted Inverts", level: 6, cat: "hybrid" }
 ];
 
 // Map special cases where rudiments have duple (d) and triple (t) variants
