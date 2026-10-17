@@ -240,3 +240,19 @@ input[type="range"] { width: 100%; margin-bottom: 16px; }
   padding: 0 20px; background: #333; color: white;
   border: none; border-radius: 8px;
 }
+
+.button-group { 
+  display: flex; 
+  gap: 12px; 
+  margin-bottom: 16px; 
+}
+.secondary-btn {
+  width: 100%; 
+  padding: 14px;
+  background: transparent; 
+  color: var(--text-primary);
+  border: 1px solid #555; 
+  border-radius: 8px;
+  font-size: 1rem; 
+  font-weight: bold; 
+}
