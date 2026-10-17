@@ -84,8 +84,17 @@ function renderGrid(level = 'all') {
     const card = document.createElement('div');
     card.className = 'rudiment-card';
     card.style.borderLeftColor = catData.color;
+    
+    // Calculate the Assignment Number (1 through 8) based on its absolute ID
+    const assignmentNum = ((rudiment.id - 1) % 8) + 1;
+
+    // If viewing 'All', show absolute ID. If viewing a specific level, show Assignment #
+    const titleText = level === 'all' 
+      ? `${rudiment.id}. ${rudiment.name}` 
+      : `#${assignmentNum} - ${rudiment.name}`;
+
     card.innerHTML = `
-      <h3>${rudiment.id}. ${rudiment.name}</h3>
+      <h3>${titleText}</h3>
       <span class="badge" style="color: ${catData.color}">${catData.name}</span>
     `;
     card.addEventListener('click', () => openPracticeModal(rudiment));
