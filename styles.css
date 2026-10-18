@@ -162,6 +162,8 @@ h2 { font-size: 1.1rem; margin-bottom: 8px; }
   overflow: hidden;
   position: relative;
   border-bottom: 1px solid #333;
+  flex: 1 0 auto;
+  min-height: 250px;
 }
 
 .toggle-group {
@@ -261,8 +263,9 @@ input[type="range"] { width: 100%; margin-bottom: 16px; }
 
 /* Allow images to grow larger when phone is sideways */
 @media (orientation: landscape) {
-  .panel { min-height: 60vh; }
-  .panel img { max-height: 60vh; }
+  .viewer-container { min-height: 75vh; }
+  .panel { min-height: 75vh; }
+  .panel img { max-height: 70vh; }
 }
 
 /* Immersive Fullscreen Mode (triggered by tap) */
