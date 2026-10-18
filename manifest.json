@@ -1,7 +1,7 @@
 {
   "name": "Lincoln Drumline Workbook",
   "short_name": "Drumline",
-  "description": "Offline-first snare drum rudiment practice and tempo tracking.",
+  "description": "Drumline Rudiments practice, Exercises and tempo tracking.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#121212",
