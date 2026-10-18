@@ -222,53 +222,95 @@ const pbInput = document.getElementById('pb-input');
 const savePbBtn = document.getElementById('save-pb-btn');
 let currentRudimentId = null;
 
-function openPracticeModal(rudiment) {
-  currentRudimentId = rudiment.id;
-  const catData = categories[rudiment.cat];
+function openPracticeModal(item) {
+  currentRudimentId = item.id;
   
-  modalTitle.textContent = rudiment.name;
+  // 1. Get correct category colors based on the active mode
+  const catData = currentMode === 'rudiments' ? categories[item.cat] : exerciseCategories[item.cat];
+  
+  modalTitle.textContent = item.name;
   modalCat.textContent = catData.name;
   modalCat.style.color = catData.color;
   
   const panelBase = document.getElementById('panel-base');
   const panelApp = document.getElementById('panel-app');
-  panelBase.innerHTML = ''; // Clear previous images
+  panelBase.innerHTML = ''; 
   panelApp.innerHTML = '';
-
-  // 1. Determine which filenames to look for
-  let baseImages = [`rud_${rudiment.id}.png`];
-  let appImages = [`rud_${rudiment.id}a.png`];
-
-  // If this rudiment is in our special map, override with the duple/triple files
-  if (variantMap[rudiment.id]) {
-    baseImages = variantMap[rudiment.id].base;
-    appImages = variantMap[rudiment.id].app;
+  
+  const toggleGroup = document.querySelector('.toggle-group');
+  const toggleBtns = toggleGroup.querySelectorAll('.toggle-btn');
+  
+  // 2. Logic for Rudiments
+  if (currentMode === 'rudiments') {
+    toggleGroup.style.display = 'flex';
+    toggleBtns[0].textContent = "Rudiment";
+    toggleBtns[1].textContent = "Application";
+    toggleBtns[1].style.display = 'block';
+    
+    let baseImages = [`rud_${item.id}.png`];
+    let appImages = [`rud_${item.id}a.png`];
+    
+    if (variantMap[item.id]) {
+      baseImages = variantMap[item.id].base;
+      appImages = variantMap[item.id].app;
+    }
+    
+    baseImages.forEach(imgName => {
+      const img = document.createElement('img');
+      img.src = `assets/images/${imgName}`;
+      img.onerror = () => { img.style.display = 'none'; };
+      panelBase.appendChild(img);
+    });
+    
+    appImages.forEach(imgName => {
+      const img = document.createElement('img');
+      img.src = `assets/images/${imgName}`;
+      img.onerror = () => { img.style.display = 'none'; };
+      panelApp.appendChild(img);
+    });
+  } 
+  // 3. Logic for Exercises
+  else {
+    const pages = item.pages || 1;
+    
+    if (pages === 1) {
+      // Single page: Hide toggle buttons and maximize space
+      toggleGroup.style.display = 'none';
+      const img = document.createElement('img');
+      img.src = `assets/images/ex_${item.id}.png`;
+      img.onerror = () => { img.style.display = 'none'; };
+      panelBase.appendChild(img);
+    } else {
+      // Multi-page: Setup swiping
+      toggleGroup.style.display = 'flex';
+      toggleBtns[0].textContent = "Page 1";
+      toggleBtns[1].textContent = "Page 2+";
+      toggleBtns[1].style.display = 'block';
+      
+      const img1 = document.createElement('img');
+      img1.src = `assets/images/ex_${item.id}a.png`;
+      img1.onerror = () => { img1.style.display = 'none'; };
+      panelBase.appendChild(img1);
+      
+      const img2 = document.createElement('img');
+      img2.src = `assets/images/ex_${item.id}b.png`;
+      img2.onerror = () => { img2.style.display = 'none'; };
+      panelApp.appendChild(img2);
+      
+      // Stack page 3 vertically if it exists
+      if (pages > 2) {
+        const img3 = document.createElement('img');
+        img3.src = `assets/images/ex_${item.id}c.png`;
+        img3.onerror = () => { img3.style.display = 'none'; };
+        panelApp.appendChild(img3);
+      }
+    }
   }
 
-  // 2. Inject Base Images
-  baseImages.forEach(imgName => {
-    const img = document.createElement('img');
-    img.src = `assets/images/${imgName}`;
-    // If an image is missing, hide it cleanly
-    img.onerror = () => { img.style.display = 'none'; };
-    panelBase.appendChild(img);
-  });
-
-  // 3. Inject Application Images
-  appImages.forEach(imgName => {
-    const img = document.createElement('img');
-    img.src = `assets/images/${imgName}`;
-    img.onerror = () => { img.style.display = 'none'; };
-    panelApp.appendChild(img);
-  });
-
-  // Load Personal Best
-  const savedPB = localStorage.getItem(`pb_rudiment_${rudiment.id}`);
+  const savedPB = localStorage.getItem(`pb_rudiment_${item.id}`);
   pbInput.value = savedPB ? savedPB : '';
   
-  // Reset Swipe
   setPanel('base');
-  
   modal.classList.remove('hidden');
 }
 
