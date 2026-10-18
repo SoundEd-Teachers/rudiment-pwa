@@ -268,22 +268,22 @@ input[type="range"] { width: 100%; margin-bottom: 16px; }
   .panel img { max-height: 70vh; }
 }
 
-/* Immersive Fullscreen Mode (triggered by tap) */
-.modal.immersive .modal-header,
-.modal.immersive .toggle-group,
-.modal.immersive .tools-container {
-  display: none;
+/* --- FORCE IMMERSIVE FULLSCREEN --- */
+.modal.immersive {
+  background: #000 !important;
+  justify-content: center !important;
 }
-.modal.immersive .viewer-container {
-  height: 100vh;
-  border-bottom: none;
-  background: #000;
-}
+.modal.immersive .viewer-container,
+.modal.immersive .swipe-track,
 .modal.immersive .panel {
-  height: 100vh;
-  padding: 8px;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
 }
 .modal.immersive .panel img {
-  max-height: 95vh;
-  width: auto;
+  max-height: 95vh !important;
+  max-width: 100vw !important;
+  object-fit: contain !important;
 }
