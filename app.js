@@ -7,6 +7,13 @@ const categories = {
   hybrid: { name: 'Hybrid', color: 'var(--cat-hybrid)' }
 };
 
+const exerciseCategories = {
+  tap_control: { name: "Tap Control", color: "#E65100" },     // Orange
+  diddle: { name: "Diddle", color: "#00C853" },               // Green
+  stick_control: { name: "Stick Control", color: "#1565C0" }, // Blue
+  rudiment_combo: { name: "Rudiment/Combo", color: "#FBC02D" } // Gold
+};
+
 const rudiments = [
   // Level 1
   { id: 1, level: 1, name: 'Single Stroke Roll', cat: 'roll' },
@@ -65,9 +72,52 @@ const rudiments = [
 ];
 
 const exercises = [
-  { id: "l1_1", name: "Accent Tap", level: 1, cat: "accent_tap", pages: 1 },
-  // ...
-  { id: "l1_4", name: "The Witch is Dead!", level: 1, cat: "solo", pages: 2 } 
+  // Level 0: Rookie Packet
+  { id: "l0_1", name: "Tap Control 8:7:6", level: 0, cat: "stick_control", pages: 1 },
+  { id: "l0_2", name: "Diddle Master", level: 0, cat: "diddle", pages: 1 },
+  { id: "l0_3", name: "sTICK cHECK", level: 0, cat: "stick_control", pages: 1 },
+  { id: "l0_4", name: "Paradiddle Study", level: 0, cat: "rudiment_combo", pages: 2 },
+  { id: "l0_5", name: "Rubank Rhythms", level: 0, cat: "stick_control", pages: 1 },
+
+  // Level 1
+  { id: "l1_1", name: "Accent Tap", level: 1, cat: "tap_control", pages: 1 },
+  { id: "l1_2", name: "Diddle Grid #1", level: 1, cat: "diddle", pages: 1 },
+  { id: "l1_3", name: "Stick Control", level: 1, cat: "stick_control", pages: 1 },
+  { id: "l1_4", name: "Flintstones", level: 1, cat: "tap_control", pages: 3 },
+  { id: "l1_5", name: "6/8 Subdivision", level: 1, cat: "diddle", pages: 1 },
+  { id: "l1_6", name: "Stick Control 2.0", level: 1, cat: "stick_control", pages: 1 },
+
+  // Level 2
+  { id: "l2_1", name: "Bananas of Pain", level: 2, cat: "tap_control", pages: 1 },
+  { id: "l2_2", name: "DaDa Diddles", level: 2, cat: "diddle", pages: 1 },
+  { id: "l2_3", name: "Satalite", level: 2, cat: "rudiment_combo", pages: 1 },
+  { id: "l2_4", name: "Accent #2", level: 2, cat: "tap_control", pages: 1 },
+  { id: "l2_5", name: "Diddle #3", level: 2, cat: "diddle", pages: 1 },
+  { id: "l2_6", name: "Flam Rud. Breakdown", level: 2, cat: "rudiment_combo", pages: 3 },
+
+  // Level 3
+  { id: "l3_1", name: "Accented Singles", level: 3, cat: "tap_control", pages: 2 },
+  { id: "l3_2", name: "SVC 234", level: 3, cat: "diddle", pages: 1 },
+  { id: "l3_3", name: "Cha-Fa-Diddles", level: 3, cat: "rudiment_combo", pages: 1 },
+  { id: "l3_4", name: "Hicken Accent/Tap", level: 3, cat: "tap_control", pages: 1 },
+  { id: "l3_5", name: "Hicken Rolls", level: 3, cat: "diddle", pages: 1 },
+  { id: "l3_6", name: "12/8 Groove", level: 3, cat: "rudiment_combo", pages: 1 },
+
+  // Level 4
+  { id: "l4_1", name: "Hicken Campin'", level: 4, cat: "tap_control", pages: 1 },
+  { id: "l4_2", name: "Dub/Huk", level: 4, cat: "diddle", pages: 1 },
+  { id: "l4_3", name: "Hicken Double Tripple", level: 4, cat: "rudiment_combo", pages: 1 },
+  { id: "l4_4", name: "Slurred Ruff", level: 4, cat: "rudiment_combo", pages: 1 },
+  { id: "l4_5", name: "Diddle Me Timbers", level: 4, cat: "diddle", pages: 1 },
+  { id: "l4_6", name: "6 Flam Exercises", level: 4, cat: "rudiment_combo", pages: 2 },
+
+  // Level 5
+  { id: "l5_1", name: "Timing Exercises", level: 5, cat: "stick_control", pages: 1 },
+  { id: "l5_2", name: "Seven 8 & 25", level: 5, cat: "diddle", pages: 1 },
+  { id: "l5_3", name: "See Spot Flam", level: 5, cat: "rudiment_combo", pages: 1 },
+  { id: "l5_4", name: "Ratama-Who?", level: 5, cat: "rudiment_combo", pages: 1 },
+  { id: "l5_5", name: "Double Tap", level: 5, cat: "diddle", pages: 1 },
+  { id: "l5_6", name: "Kicked in the Grace", level: 5, cat: "rudiment_combo", pages: 1 }
 ];
 
 // Map special cases where rudiments have duple (d) and triple (t) variants
