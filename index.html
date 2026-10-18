@@ -74,16 +74,16 @@
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-      <button class="nav-item active" id="nav-rudiments">
+      <button class="nav-item active" id="nav-rudiments" data-target="view-rudiments">
         🥁<br>Rudiments
       </button>
-      <button class="nav-item" id="nav-exercises">
+      <button class="nav-item" id="nav-exercises" data-target="view-rudiments">
         🎶<br>Exercises
       </button>
-      <button class="nav-item" id="nav-counter">
+      <button class="nav-item" id="nav-counter" data-target="view-counter">
         ⏱️<br>Counter
       </button>
-    </nav>
+  </nav>
 
   <!-- FULL SCREEN PRACTICE MODAL -->
   <div id="practice-modal" class="modal hidden">
@@ -105,11 +105,6 @@
         </div>
         <div class="panel" id="panel-app">
           <!-- Images injected via JS -->
-        </div>
-      </div>
-        <div class="panel" id="panel-app">
-          <img id="img-app" src="" alt="Application" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="img-fallback" style="display:none;">[ App Image Missing ]</div>
         </div>
       </div>
     </div>
