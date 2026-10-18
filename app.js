@@ -273,36 +273,41 @@ function openPracticeModal(item) {
   else {
     const pages = item.pages || 1;
     
-    if (pages === 1) {
-      // Single page: Hide toggle buttons and maximize space
-      toggleGroup.style.display = 'none';
+    // Dynamically convert ID "l1_4" into "level1_4" to match your files
+    const fileId = item.id.replace('l', 'level'); 
+    
+    // Helper function to handle .png vs .PNG case-sensitivity
+    function injectExerciseImage(suffix, targetPanel) {
       const img = document.createElement('img');
-      img.src = `assets/images/ex_${item.id}.png`;
-      img.onerror = () => { img.style.display = 'none'; };
-      panelBase.appendChild(img);
+      const basePath = `assets/images/ex_${fileId}${suffix}`;
+      img.src = `${basePath}.png`; // Try lowercase first
+      
+      img.onerror = function() {
+        if (this.src.endsWith('.png')) {
+          this.src = `${basePath}.PNG`; // If lowercase fails, try uppercase
+        } else {
+          this.style.display = 'none';
+        }
+      };
+      targetPanel.appendChild(img);
+    }
+
+    if (pages === 1) {
+      // Single page
+      toggleGroup.style.display = 'none';
+      injectExerciseImage('', panelBase);
     } else {
-      // Multi-page: Setup swiping
+      // Multi-page
       toggleGroup.style.display = 'flex';
       toggleBtns[0].textContent = "Page 1";
       toggleBtns[1].textContent = "Page 2+";
       toggleBtns[1].style.display = 'block';
       
-      const img1 = document.createElement('img');
-      img1.src = `assets/images/ex_${item.id}a.png`;
-      img1.onerror = () => { img1.style.display = 'none'; };
-      panelBase.appendChild(img1);
+      injectExerciseImage('a', panelBase);
+      injectExerciseImage('b', panelApp);
       
-      const img2 = document.createElement('img');
-      img2.src = `assets/images/ex_${item.id}b.png`;
-      img2.onerror = () => { img2.style.display = 'none'; };
-      panelApp.appendChild(img2);
-      
-      // Stack page 3 vertically if it exists
       if (pages > 2) {
-        const img3 = document.createElement('img');
-        img3.src = `assets/images/ex_${item.id}c.png`;
-        img3.onerror = () => { img3.style.display = 'none'; };
-        panelApp.appendChild(img3);
+        injectExerciseImage('c', panelApp);
       }
     }
   }
