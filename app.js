@@ -64,6 +64,12 @@ const rudiments = [
   { id: 48, name: "Inverted Inverts", level: 6, cat: "hybrid" }
 ];
 
+const exercises = [
+  { id: "l1_1", name: "Accent Tap", level: 1, cat: "accent_tap", pages: 1 },
+  // ...
+  { id: "l1_4", name: "The Witch is Dead!", level: 1, cat: "solo", pages: 2 } 
+];
+
 // Map special cases where rudiments have duple (d) and triple (t) variants
 const variantMap = {
   // Rudiment 22 only has a base, but two applications
