@@ -130,34 +130,62 @@ const variantMap = {
 };
 
 // --- 2. UI INITIALIZATION & NAVIGATION ---
+let currentMode = 'rudiments'; 
+const navRudiments = document.getElementById('nav-rudiments');
+const navExercises = document.getElementById('nav-exercises');
+
 const grid = document.getElementById('rudiment-grid');
 const levelBtns = document.querySelectorAll('.filter-btn');
 const navItems = document.querySelectorAll('.nav-item');
 const views = document.querySelectorAll('.view');
 
+navRudiments.addEventListener('click', () => {
+  currentMode = 'rudiments';
+  navRudiments.classList.add('active');
+  navExercises.classList.remove('active');
+  // Re-render the grid using whatever level filter is currently selected
+  const activeLevel = document.querySelector('.filter-btn.active').dataset.level;
+  renderGrid(activeLevel); 
+});
+
+navExercises.addEventListener('click', () => {
+  currentMode = 'exercises';
+  navExercises.classList.add('active');
+  navRudiments.classList.remove('active');
+  const activeLevel = document.querySelector('.filter-btn.active').dataset.level;
+  renderGrid(activeLevel);
+});
+
 function renderGrid(level = 'all') {
   grid.innerHTML = '';
-  const filtered = level === 'all' ? rudiments : rudiments.filter(r => r.level == level);
   
-  filtered.forEach(rudiment => {
-    const catData = categories[rudiment.cat];
+  // Choose the correct database and colors based on the current mode
+  const dataSource = currentMode === 'rudiments' ? rudiments : exercises;
+  const catSource = currentMode === 'rudiments' ? categories : exerciseCategories;
+  
+  const filtered = level === 'all' ? dataSource : dataSource.filter(item => item.level == level);
+  
+  filtered.forEach(item => {
+    const catData = catSource[item.cat];
     const card = document.createElement('div');
     card.className = 'rudiment-card';
     card.style.borderLeftColor = catData.color;
     
-    // Calculate the Assignment Number (1 through 8) based on its absolute ID
-    const assignmentNum = ((rudiment.id - 1) % 8) + 1;
-
-    // If viewing 'All', show absolute ID. If viewing a specific level, show Assignment #
-    const titleText = level === 'all' 
-      ? `${rudiment.id}. ${rudiment.name}` 
-      : `#${assignmentNum} - ${rudiment.name}`;
+    let titleText = '';
+    if (currentMode === 'rudiments') {
+      const assignmentNum = ((item.id - 1) % 8) + 1;
+      titleText = level === 'all' ? `${item.id}. ${item.name}` : `#${assignmentNum} - ${item.name}`;
+    } else {
+      // For exercises, we extract the assignment number from the ID (e.g., "l1_4" -> "4")
+      const exNum = item.id.split('_')[1];
+      titleText = level === 'all' ? item.name : `#${exNum} - ${item.name}`;
+    }
 
     card.innerHTML = `
       <h3>${titleText}</h3>
       <span class="badge" style="color: ${catData.color}">${catData.name}</span>
     `;
-    card.addEventListener('click', () => openPracticeModal(rudiment));
+    card.addEventListener('click', () => openPracticeModal(item));
     grid.appendChild(card);
   });
 }
