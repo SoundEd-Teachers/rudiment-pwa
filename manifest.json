@@ -1,6 +1,6 @@
 {
-  "name": "Rudiment Practice Pad",
-  "short_name": "Rudiments",
+  "name": "Lincoln Drumline Workbook",
+  "short_name": "Drumline",
   "description": "Offline-first snare drum rudiment practice and tempo tracking.",
   "start_url": "./index.html",
   "display": "standalone",
